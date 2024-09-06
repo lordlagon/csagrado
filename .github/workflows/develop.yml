@@ -5,7 +5,8 @@ on:
     branches: [ "develop" ]
   pull_request:
     branches: [ "develop" ]
-    
+  pull_request_target:
+
   workflow_dispatch:
     
 env:
@@ -62,3 +63,13 @@ jobs:
         run: gh pr create -B main -H develop --title 'Merge Develop into Main' --body 'Created automatic Pull Request by Github action.'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
+  AutoAprove:
+    needs: CreatePullRequest
+    runs-on: ubuntu-latest 
+      
+    permissions:
+      contents: read
+      pull-requests: write 
+    steps:
+      - uses: actions/labeler@v5

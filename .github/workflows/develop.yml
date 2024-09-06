@@ -5,6 +5,8 @@ on:
     branches: [ "develop" ]
   pull_request:
     branches: [ "develop" ]
+  pull_request_target:
+    branches: ["main"]
     
   workflow_dispatch:
     
@@ -62,3 +64,13 @@ jobs:
         run: gh pr create -B main -H develop --title 'Merge Develop into Main' --body 'Created automatic Pull Request by Github action.'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+  auto-approve:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - uses: hmarr/auto-approve-action@v4
+        with:
+          review-message: "Auto approved automated PR"

@@ -5,9 +5,12 @@ on:
     branches: [ "develop" ]
   pull_request:
     branches: [ "develop" ]
-  
+    
   workflow_dispatch:
-
+    
+env:
+  DOTNET_VERSION: '8.0.x'
+  
 permissions:
   contents: read
   pages: write
@@ -28,15 +31,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup .Net
+      - name: Setup DotNet ${{ env.DOTNET_VERSION }}
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Install .Net Wasm Tools
+      - name: Install DotNet Wasm Tools
         run: dotnet workload install wasm-tools
 
-      - name: Restore .NET Dependencies
+      - name: Restore Dependencies
         run: dotnet restore
 
       - name: Build
@@ -56,4 +59,4 @@ jobs:
       - name: Create pull request #Etapa de criação do pull request usando o cli do github
         run: gh pr create -B main -H develop --title 'Merge Develop into Main' --body 'Created automatic Pull Request by Github action.'
         env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

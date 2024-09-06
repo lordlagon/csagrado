@@ -49,25 +49,27 @@ jobs:
       - name: Test application
         run: dotnet test --no-build --verbosity normal
       
-  CreatePullRequest:
-    needs: BuildAndTestApplication
-    runs-on: ubuntu-latest
+  #CreatePullRequest:
+   # needs: BuildAndTestApplication
+    #runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    #steps:
+      #- name: Checkout code
+     #   uses: actions/checkout@v4
 
-      - name: Create pull request #Etapa de criação do pull request usando o cli do github
-        run: gh pr create -B main -H develop --title 'Merge Develop into Main' --body 'Created automatic Pull Request by Github action.'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #  - name: Create pull request #Etapa de criação do pull request usando o cli do github
+     #   run: gh pr create -B main -H develop --title 'Merge Develop into Main' --body 'Created automatic Pull Request by Github action.'
+      #  env:
+       #   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      
   
   AutoAprove:
-    needs: CreatePullRequest
+    needs: BuildAndTestApplication
     runs-on: ubuntu-latest 
       
     permissions:
       contents: read
       pull-requests: write 
     steps:
-      - uses: hmarr/auto-approve-action@v4
+      - uses: actions/labeler@v5

@@ -72,4 +72,4 @@ jobs:
       contents: read
       pull-requests: write 
     steps:
-      - uses: actions/labeler@v5
+      - uses: hmarr/auto-approve-action@v4

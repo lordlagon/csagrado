@@ -1,4 +1,4 @@
-﻿@page "/AddGame"
+﻿@page "/csagrado/AddGame"
 @inject NavigationManager NavigationManager
 
 <MudCard Class="ml-10 mr-10" style="margin-top:30px" Elevation="25">
@@ -39,11 +39,11 @@
         //GameServices.SaveGame(game);
         game = new GameModel();
         GetAllGameList();
-        NavigationManager.NavigateTo("/GamePage");
+        NavigationManager.NavigateTo("/csagrado/GamePage");
     }
 
     void Cancel()
     {
-        NavigationManager.NavigateTo("/GamePage");
+        NavigationManager.NavigateTo("/csagrado/GamePage");
     }
 }

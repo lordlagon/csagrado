@@ -1,0 +1,73 @@
+﻿@page "/gamepage"
+@inject IDialogService DialogService
+<PageTitle>Game List</PageTitle>
+
+<MudCard Class="ml-10 mr-10" style="margin-top:30px" Elevation="25">
+    <MudText Align="Align.Left"
+             Typo="Typo.h4"
+             Style="margin-left:10px;margin-top:10px;margin-top:10px"><b>Game  -  List</b></MudText>
+<MudItem xs="3" Align="justify">
+    <MudButton style="margin:15px"
+               StartIcon="@Icons.Material.Filled.Add"
+               Variant="Variant.Text"
+               Color="Color.Primary"
+               Href="/AddGame">Add a new game</MudButton>
+               </MudItem>
+    <MudSimpleTable>
+        <thead>
+            <MudTr>
+                <MudTh>&nbsp;&nbsp; Games</MudTh>
+                <MudTh>&nbsp;&nbsp; Release Date</MudTh>
+                <MudTh>&nbsp;&nbsp; Action</MudTh>
+            </MudTr>
+        </thead>
+        <tbody>
+            @foreach (var game in gameList)
+            {
+                <tr>
+                    <MudTd DataLabel="Games" Style="width:400px;height:50px;">&nbsp;&nbsp; @game.Name</MudTd>
+                    <MudTd DataLabel="Release Date" Style="width:400px;height:50px;">&nbsp;&nbsp; @game.ReleaseDate?.ToString("dd MMMM yyyy")</MudTd>
+                    <MudTd DataLabel="Action">
+                        <MudIconButton Href="@($"EditGame/{game.Id}")" Color="Color.Warning" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" />
+                        <MudIconButton @onclick="@(()=> Delete(game.Id))" Color="Color.Error" Icon="@Icons.Material.Filled.Delete" Size="Size.Small" />
+                    </MudTd>
+                </tr>
+            }
+        </tbody>
+    </MudSimpleTable>
+</MudCard>
+
+
+@code {
+    private GameModel game = new();
+    private List<GameModel> gameList = [];
+
+    protected override void OnInitialized()
+    {
+        GetAllGameList();
+    }
+
+    private List<GameModel> GetAllGameList()
+    {
+        //gameList = GameServices.GetGameList();
+        return gameList;
+    }
+
+    private void Save()
+    {
+        //GameServices.SaveGame(game);
+        game = new GameModel();
+        GetAllGameList();
+    }
+
+    private void Edit(int id)
+    {
+        game = gameList.FirstOrDefault(g => g.Id == id)!;
+    }
+
+    private void Delete(int id)
+    {
+        //GameServices.DeleteGame(id);
+        GetAllGameList();
+    }
+}

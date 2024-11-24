@@ -10,4 +10,5 @@ namespace Csagrado.Course
         public string Description { get; set; } = string.Empty;
         public DateTime? ReleaseDate { get; set; } = DateTime.MinValue;
     }
+
 }

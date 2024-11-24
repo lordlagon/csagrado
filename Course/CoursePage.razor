@@ -12,7 +12,7 @@
                Variant="Variant.Text"
                Color="Color.Primary"
 
-               Href="/csagrado/addgame">Add a new game</MudButton>
+               Href="./addgame">Add a new game</MudButton>
 
                </MudItem>
     <MudSimpleTable>
@@ -31,7 +31,7 @@
                     <MudTd DataLabel="Release Date" Style="width:400px;height:50px;">&nbsp;&nbsp; @game.ReleaseDate?.ToString("dd MMMM yyyy")</MudTd>
                     <MudTd DataLabel="Action">
 
-                        <MudIconButton Href="@($"/csagrado/editgame/{game.Id}")" Color="Color.Warning" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" />
+                        <MudIconButton Href="@($"./editgame/{game.Id}")" Color="Color.Warning" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" />
 
                         <MudIconButton @onclick="@(()=> Delete(game.Id))" Color="Color.Error" Icon="@Icons.Material.Filled.Delete" Size="Size.Small" />
                     </MudTd>

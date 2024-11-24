@@ -1,4 +1,4 @@
-﻿@page "/gamepage"
+﻿@page "/csagrado/gamepage"
 @inject IDialogService DialogService
 <PageTitle>Game List</PageTitle>
 
@@ -11,7 +11,7 @@
                StartIcon="@Icons.Material.Filled.Add"
                Variant="Variant.Text"
                Color="Color.Primary"
-               Href="/AddGame">Add a new game</MudButton>
+               Href="/csagrado/AddGame">Add a new game</MudButton>
                </MudItem>
     <MudSimpleTable>
         <thead>
@@ -28,7 +28,7 @@
                     <MudTd DataLabel="Games" Style="width:400px;height:50px;">&nbsp;&nbsp; @game.Name</MudTd>
                     <MudTd DataLabel="Release Date" Style="width:400px;height:50px;">&nbsp;&nbsp; @game.ReleaseDate?.ToString("dd MMMM yyyy")</MudTd>
                     <MudTd DataLabel="Action">
-                        <MudIconButton Href="@($"EditGame/{game.Id}")" Color="Color.Warning" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" />
+                        <MudIconButton Href="@($"/csagrado/EditGame/{game.Id}")" Color="Color.Warning" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" />
                         <MudIconButton @onclick="@(()=> Delete(game.Id))" Color="Color.Error" Icon="@Icons.Material.Filled.Delete" Size="Size.Small" />
                     </MudTd>
                 </tr>

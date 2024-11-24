@@ -1,5 +1,4 @@
-@page "/csagrado/editpage/{Id}"
-
+﻿@page "/EditGame/{Id}"
 @inject NavigationManager NavigationManager
 
 
@@ -46,13 +45,11 @@
         //GameServices.SaveGame(game);
         game = new GameModel();
         GetAllGameList();
-
-        NavigationManager.NavigateTo("/csagrado/gamepage");
-
+        NavigationManager.NavigateTo("/GamePage");
     }
 
     void Cancel()
     {
-        NavigationManager.NavigateTo("/csagrado/gamepage");
+        NavigationManager.NavigateTo("/GamePage");
     }
 }

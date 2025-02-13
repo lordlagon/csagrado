@@ -1,0 +1,58 @@
+@page "/editpage/{Id}"
+
+@inject NavigationManager NavigationManager
+
+
+
+<MudCard Class="ml-10 mr-10" style="margin-top:30px" Elevation="25">
+    <MudText Align="Align.Left" Typo="Typo.h4" Style="margin-left:10px;margin-top:10px;margin-top:10px"><b>Edit Game</b></MudText>
+
+    <MudDivider style="background-color:black" DividerType="DividerType.Middle" Class="my-6" />
+    <MudCard Elevation="0" Style="margin-left:20px">
+        <MudText Color="Color.Dark"><b>Games</b></MudText>
+        <MudTextField Margin="Margin.Dense" Style="height:25px;width:50%" T="string" Placeholder="Game Name" @bind-Value="game.Name" />
+        <MudText Style="padding-bottom:20px"></MudText>
+        <MudText Color="Color.Dark"><b>Release Date</b></MudText>
+        <MudTextField Margin="Margin.Dense" Style="height:25px;width:50%" InputType="InputType.Date" T="DateTime?" Format="yyyy-MM-dd" Placeholder="Release Date" @bind-Value="game.ReleaseDate" />
+        <MudText Style="padding-bottom:20px"></MudText>
+
+
+        <MudButton @onclick="@Save" Variant="Variant.Filled" Color="Color.Primary">Update</MudButton>
+        <MudButton @onclick="@Cancel" Variant="Variant.Filled" Color="Color.Error">Cancel</MudButton>
+        <MudText Style="padding-bottom:20px"></MudText>
+    </MudCard>
+</MudCard>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private GameModel game = new GameModel();
+    private List<GameModel> gameList = new List<GameModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        //game = await Task.Run(() => GameServices.GetGameById(Convert.ToInt32(Id)));
+    }
+
+    private List<GameModel> GetAllGameList()
+    {
+        // gameList = GameServices.GetGameList();
+        return gameList;
+    }
+
+    private void Save()
+    {
+        //GameServices.SaveGame(game);
+        game = new GameModel();
+        GetAllGameList();
+
+        NavigationManager.NavigateTo("/csagrado/gamepage");
+
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("/csagrado/gamepage");
+    }
+}
